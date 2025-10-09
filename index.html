@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Wedding of NINGSI & ARWAN - 19 Oktober 2025</title>
+    <!-- Load Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Load Google Fonts: Playfair Display for headings, Inter for body -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <!-- Load Lucide Icons for aesthetic icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        /* Custom Configuration for elegant fonts */
+        :root {
+            --font-display: 'Playfair Display', serif;
+            --font-body: 'Inter', sans-serif;
+        }
+        .font-display { font-family: var(--font-display); }
+        .font-body { font-family: var(--font-body); }
+
+        /* Custom scroll-reveal styles (pre-animation state) */
+        .scroll-reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 1.2s ease-out, transform 1.2s ease-out;
+            will-change: opacity, transform;
+        }
+        /* Active scroll-reveal state */
+        .scroll-reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Parallax effect on Hero (using background-attachment for light parallax) */
+        .hero-parallax {
+            /* Menggunakan salah satu foto yang sudah ada untuk background cover */
+            background-image: url('https://lh3.googleusercontent.com/d/1dH0MC2HT7i0rMOpEiRwoRnImN4glNv9O');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed; /* Parallax effect */
+        }
+        
+        /* Mobile adjustment for parallax */
+        @media (max-width: 768px) {
+            .hero-parallax {
+                background-attachment: scroll;
+                background-position: 50% 0; 
+            }
+        }
+
+        /* Styling for the audio button */
+        #music-toggle {
+            transition: all 0.3s ease;
+        }
+
+        /* Smooth transition for the main content container when opening */
+        .main-content {
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+        
+        /* Ensures body scroll is managed by the overlay state */
+        body.no-scroll {
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body class="font-body text-gray-900 bg-white antialiased overflow-x-hidden no-scroll">
+
+    <!-- Custom Toast/Alert Box (Pengganti alert()) -->
+    <div id="custom-alert" class="fixed top-4 left-1/2 -translate-x-1/2 bg-red-600 text-white p-4 rounded-lg shadow-xl z-[70] transition-opacity duration-300 opacity-0 pointer-events-none max-w-sm text-center" role="alert">
+        <span id="alert-message"></span>
+    </div>
+
+    <!-- Audio Player (Hidden by default, plays on button click) -->
+    <audio id="wedding-music" loop preload="auto">
+        <!-- ====================================================================================== -->
+        <!-- Perubahan telah dilakukan di bawah: Tautan GitHub RAW untuk pemutaran yang andal -->
+        <source src="https://raw.githubusercontent.com/dxdigital89-commits/music/main/no-copyright-music-400925.mp3" type="audio/mpeg">
+        <!-- ====================================================================================== -->
+    </audio>
+
+    <!-- Floating Music Toggle Button -->
+    <button id="music-toggle" class="fixed bottom-4 right-4 z-50 p-3 bg-gray-900 text-white rounded-full shadow-xl transition-transform hover:scale-105 hidden" aria-label="Toggle Background Music">
+        <span id="music-icon" data-lucide="volume-x" class="w-5 h-5"></span>
+    </button>
+    
+    <!-- Floating "Open Invitation" Overlay (Initial State) -->
+    <div id="opener-overlay" class="fixed inset-0 z-[60] bg-white flex flex-col items-center justify-center p-6 text-center transition-opacity duration-700">
+        <p class="text-sm uppercase tracking-widest mb-2 text-gray-600">Undangan Pernikahan</p>
+        <h1 class="text-4xl sm:text-6xl font-display font-bold mb-8">NINGSI & ARWAN</h1>
+        <p class="text-xl font-display italic mb-10 text-gray-700">Minggu, 19 Oktober 2025</p>
+        <button id="open-invitation-btn" class="flex items-center justify-center px-8 py-3 bg-gray-900 text-white text-sm uppercase tracking-widest rounded-lg shadow-xl hover:bg-gray-700 transition duration-300">
+            Buka Undangan
+        </button>
+    </div>
+
+    <!-- Main Content Container (Hidden initially) -->
+    <div id="main-content" class="main-content">
+        
+        <!-- Navbar (Sticky Header) -->
+        <header class="sticky top-0 z-40 bg-white/90 backdrop-blur-sm border-b border-gray-200 shadow-sm transition duration-300">
+            <nav class="container mx-auto px-4 py-3 flex justify-center">
+                <a href="#hero" class="text-xl font-display font-semibold transition hover:text-gray-600">N & A</a>
+            </nav>
+        </header>
+
+        <!-- 1. Hero Section (Parallax) -->
+        <section id="hero" class="hero-parallax h-screen flex items-center justify-center text-white relative">
+            <!-- Dark Overlay for Readability -->
+            <div class="absolute inset-0 bg-gray-900/40"></div>
+            
+            <div class="relative z-10 text-center p-6 scroll-reveal">
+                <p class="text-lg sm:text-xl font-display italic mb-2">You are invited to the wedding of</p>
+                <h2 class="text-5xl sm:text-7xl font-display font-bold leading-tight my-4">Andi Arwan</h2>
+                <span class="text-4xl sm:text-6xl font-display font-light">&</span>
+                <h2 class="text-5xl sm:text-7xl font-display font-bold leading-tight mt-4">Andi Surya Ningsi</h2>
+                <p class="text-base sm:text-lg uppercase tracking-widest mt-8 border border-white inline-block px-4 py-2 rounded-full">
+                    Minggu, 19.10.2025
+                </p>
+            </div>
+        </section>
+
+        <!-- 2. The Verse / Quote -->
+        <section class="py-16 sm:py-24 bg-white">
+            <div class="container mx-auto px-4 max-w-2xl text-center scroll-reveal">
+                <p class="text-lg sm:text-xl italic font-display text-gray-800">
+                    "Pernikahan yang sukses membutuhkan jatuh cinta berkali-kali, selalu dengan orang yang sama."
+                </p>
+                <p class="mt-6 text-sm uppercase tracking-widest text-gray-500">— Mignon McLaughlin</p>
+            </div>
+        </section>
+
+        <!-- 3. Our Story / Formal Invitation Text -->
+        <section id="story" class="py-16 sm:py-24 bg-gray-50 border-t border-b border-gray-200">
+            <div class="container mx-auto px-4 max-w-4xl scroll-reveal">
+                <h3 class="text-4xl font-display font-bold text-center mb-12">Our Story</h3>
+                
+                <div class="flex flex-col md:flex-row items-center justify-center space-y-12 md:space-y-0 md:space-x-16">
+                    <!-- Groom -->
+                    <div class="text-center w-full md:w-1/2">
+                        <!-- Placeholder image URL from the original elegant design -->
+                        <img src="https://placehold.co/150x150/000/fff?text=Andi+Arwan" onerror="this.src='https://placehold.co/150x150/000/fff?text=Andi+Arwan'" alt="Foto Pria" class="w-32 h-32 rounded-full mx-auto mb-4 object-cover border-4 border-gray-900 shadow-md transition duration-500 hover:scale-105">
+                        <h4 class="text-2xl font-display font-semibold">Andi Arwan, S.Pd</h4>
+                        <p class="text-sm mt-1 text-gray-600">Putra kedua dari Densi Agung & Raden Mawar</p>
+                    </div>
+                    
+                    <!-- Separator -->
+                    <div class="text-4xl font-display font-light text-gray-700 hidden md:block">&</div>
+
+                    <!-- Bride -->
+                    <div class="text-center w-full md:w-1/2">
+                        <!-- Placeholder image URL from the original elegant design -->
+                        <img src="https://placehold.co/150x150/000/fff?text=Andi+Surya" onerror="this.src='https://placehold.co/150x150/000/fff?text=Andi+Surya'" alt="Foto Wanita" class="w-32 h-32 rounded-full mx-auto mb-4 object-cover border-4 border-gray-900 shadow-md transition duration-500 hover:scale-105">
+                        <h4 class="text-2xl font-display font-semibold">Andi Surya Ningsi, S.K.M</h4>
+                        <p class="text-sm mt-1 text-gray-600">Putri kedua dari Bpk.Abd Hamid (Alm) & Ramliah Ambo</p>
+                    </div>
+                </div>
+
+                <div class="mt-16 text-center max-w-3xl mx-auto text-gray-700">
+                    <p class="mb-4">Dengan memohon rahmat dan ridho Allah SWT, kami bermaksud menyelenggarakan acara pernikahan putra dan putri kami.</p>
+                    <p>Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir untuk memberikan doa restu.</p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 4. Event Details & Countdown -->
+        <section id="events" class="py-16 sm:py-24 bg-white">
+            <div class="container mx-auto px-4 scroll-reveal">
+                <h3 class="text-4xl font-display font-bold text-center mb-12">Save The Date</h3>
+
+                <!-- Countdown Timer -->
+                <div class="max-w-xl mx-auto mb-16 p-6 bg-gray-900 text-white rounded-xl shadow-lg text-center transition duration-500 hover:shadow-2xl">
+                    <p class="text-sm uppercase tracking-widest mb-4">Menuju Hari Bahagia</p>
+                    <div id="countdown" class="grid grid-cols-4 gap-4">
+                        <!-- Timer blocks will be populated by JS -->
+                    </div>
+                </div>
+                
+                <div class="max-w-3xl mx-auto grid md:grid-cols-2 gap-10">
+                    <!-- Akad Nikah -->
+                    <div class="p-8 border border-gray-300 rounded-xl text-center shadow-lg hover:shadow-xl transition duration-300 scroll-reveal">
+                        <span data-lucide="book-open" class="w-8 h-8 mx-auto mb-4 text-gray-900"></span>
+                        <h4 class="text-2xl font-display font-semibold mb-3 border-b pb-2 border-gray-200">Akad Nikah</h4>
+                        <p class="text-lg font-body font-medium">Minggu, 19 Oktober 2025</p>
+                        <p class="text-xl font-display font-bold mt-2 mb-4">Pukul 09:00 WIB</p>
+                        <p class="text-sm text-gray-600">Desa Barat Lambongan</p>
+                        <p class="text-sm text-gray-600">Kecamatan Bontomatene, Kab. Kepulauan Selayar</p>
+                    </div>
+
+                    <!-- Resepsi Pernikahan -->
+                    <div class="p-8 border border-gray-300 rounded-xl text-center shadow-lg hover:shadow-xl transition duration-300 scroll-reveal">
+                        <span data-lucide="cake" class="w-8 h-8 mx-auto mb-4 text-gray-900"></span>
+                        <h4 class="text-2xl font-display font-semibold mb-3 border-b pb-2 border-gray-200">Resepsi Pernikahan</h4>
+                        <p class="text-lg font-body font-medium">Minggu, 19 Oktober 2025</p>
+                        <p class="text-xl font-display font-bold mt-2 mb-4">Pukul 10:00 WIB</p>
+                        <p class="text-sm text-gray-600">Desa Barat Lambongan</p>
+                        <p class="text-sm text-gray-600">Kecamatan Bontomatene, Kab. Kepulauan Selayar</p>
+                    </div>
+                </div>
+                
+                <!-- Google Maps Link -->
+                <div class="text-center mt-12 scroll-reveal">
+                    <a href="https://maps.app.goo.gl/YourActualLocationLink" target="_blank" class="inline-flex items-center px-6 py-3 bg-gray-900 text-white text-sm uppercase tracking-widest rounded-lg shadow-lg hover:bg-gray-700 transition duration-300">
+                        <span data-lucide="map-pin" class="w-4 h-4 mr-2"></span>
+                        Lihat Lokasi di Google Maps
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. Gallery Section -->
+        <section id="gallery" class="py-16 sm:py-24 bg-gray-50 border-t border-gray-200">
+            <div class="container mx-auto px-4 scroll-reveal">
+                <h3 class="text-4xl font-display font-bold text-center mb-12">Our Gallery</h3>
+                
+                <div class="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-4 max-w-6xl mx-auto">
+                    <!-- Gallery Items (Using original image placeholders) -->
+                    <div class="group relative overflow-hidden aspect-square rounded-lg shadow-md transition duration-300 hover:shadow-xl scroll-reveal">
+                        <img src="https://lh3.googleusercontent.com/d/1kWoAEl8nZDPRNxrqb-Q9V8J9Au9KAeyz" onerror="this.src='https://placehold.co/400x400/ccc/333?text=Foto+1'" alt="Foto 1" class="w-full h-full object-cover transition duration-500 group-hover:scale-110">
+                    </div>
+                    <div class="group relative overflow-hidden aspect-square rounded-lg shadow-md transition duration-300 hover:shadow-xl scroll-reveal" style="transition-delay: 100ms;">
+                        <img src="https://lh3.googleusercontent.com/d/1X4jUDho6zf6YPA60CyNIjcIOhAoTs4OA" onerror="this.src='https://placehold.co/400x400/ccc/333?text=Foto+2'" alt="Foto 2" class="w-full h-full object-cover transition duration-500 group-hover:scale-110">
+                    </div>
+                    <div class="group relative overflow-hidden aspect-square rounded-lg shadow-md transition duration-300 hover:shadow-xl scroll-reveal" style="transition-delay: 200ms;">
+                        <img src="https://lh3.googleusercontent.com/d/1dH0MC2HT7i0rMOpEiRwoRnImN4glNv9O" onerror="this.src='https://placehold.co/400x400/ccc/333?text=Foto+3'" alt="Foto 3" class="w-full h-full object-cover transition duration-500 group-hover:scale-110">
+                    </div>
+                    <div class="group relative overflow-hidden aspect-square rounded-lg shadow-md transition duration-300 hover:shadow-xl scroll-reveal" style="transition-delay: 300ms;">
+                        <img src="https://lh3.googleusercontent.com/d/1hZNYk-jr9laZrHOOxCRAXp9noe2Prvn7" onerror="this.src='https://placehold.co/400x400/ccc/333?text=Foto+4'" alt="Foto 4" class="w-full h-full object-cover transition duration-500 group-hover:scale-110">
+                    </div>
+                    <div class="group relative overflow-hidden aspect-square rounded-lg shadow-md transition duration-300 hover:shadow-xl scroll-reveal" style="transition-delay: 400ms;">
+                        <img src="https://lh3.googleusercontent.com/d/1aocBLrtrl9zK5UBnrPVEs9-LiUcwfX48" onerror="this.src='https://placehold.co/400x400/ccc/333?text=Foto+5'" alt="Foto 5" class="w-full h-full object-cover transition duration-500 group-hover:scale-110">
+                    </div>
+                    <div class="group relative overflow-hidden aspect-square rounded-lg shadow-md transition duration-300 hover:shadow-xl scroll-reveal" style="transition-delay: 500ms;">
+                        <img src="https://lh3.googleusercontent.com/d/1OOseknH8_NFZmETYElalMphY3n43wczr" onerror="this.src='https://placehold.co/400x400/ccc/333?text=Foto+6'" alt="Foto 6" class="w-full h-full object-cover transition duration-500 group-hover:scale-110">
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 6. RSVP / Konfirmasi Kehadiran (RESTORED FIREBASE) -->
+        <section id="rsvp" class="py-16 sm:py-24 bg-white border-t border-gray-200">
+            <div class="container mx-auto px-4 max-w-xl scroll-reveal">
+                <h3 class="text-4xl font-display font-bold text-center mb-12">Konfirmasi Kehadiran (RSVP)</h3>
+                
+                <form id="rsvp-form" class="p-8 border border-gray-300 rounded-xl shadow-lg transition duration-300 hover:shadow-xl bg-white">
+                    <p class="mb-6 text-center text-gray-700">Mohon konfirmasi kehadiran Anda untuk membantu kami dalam persiapan acara.</p>
+
+                    <div id="rsvp-auth-status" class="mb-4 text-center text-sm font-medium text-gray-600">
+                         Memuat sistem...
+                    </div>
+
+                    <div class="mb-4">
+                        <label for="guest_name" class="block text-sm font-medium text-gray-700 mb-1">Nama Lengkap</label>
+                        <input type="text" id="guest_name" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-gray-900 focus:border-gray-900 transition" placeholder="Contoh: Budi Hartono">
+                    </div>
+
+                    <div class="mb-4">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Konfirmasi Kehadiran</label>
+                        <div class="flex space-x-6">
+                            <label class="inline-flex items-center">
+                                <input type="radio" name="attendance" value="Hadir" required class="form-radio text-gray-900 focus:ring-gray-900" checked>
+                                <span class="ml-2 text-gray-800">Ya, Saya Akan Hadir</span>
+                            </label>
+                            <label class="inline-flex items-center">
+                                <input type="radio" name="attendance" value="Tidak Hadir" required class="form-radio text-gray-900 focus:ring-gray-900">
+                                <span class="ml-2 text-gray-800">Maaf, Tidak Bisa Hadir</span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-6">
+                        <label for="attendee_count" class="block text-sm font-medium text-gray-700 mb-1">Jumlah Tamu (termasuk Anda)</label>
+                        <select id="attendee_count" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-gray-900 focus:border-gray-900 transition">
+                            <option value="1">1 Orang</option>
+                            <option value="2">2 Orang</option>
+                            <option value="3">3 Orang</option>
+                            <option value="4">4 Orang</option>
+                        </select>
+                    </div>
+
+                    <button type="submit" id="rsvp-submit-btn" class="w-full flex items-center justify-center px-8 py-3 bg-gray-900 text-white text-sm uppercase tracking-widest rounded-lg shadow-lg hover:bg-gray-700 transition duration-300 disabled:opacity-50" disabled>
+                        Kirim Konfirmasi
+                    </button>
+                    
+                    <div id="rsvp-message" class="mt-4 text-center text-sm font-medium hidden"></div>
+                </form>
+            </div>
+        </section>
+
+        <!-- 7. Wedding Gift / Angpao Digital -->
+        <section id="gift" class="py-16 sm:py-24 bg-gray-50 border-b border-gray-200">
+            <div class="container mx-auto px-4 max-w-xl scroll-reveal">
+                <h3 class="text-4xl font-display font-bold text-center mb-12">Wedding Gift</h3>
+                <div class="p-8 border border-gray-300 rounded-xl shadow-lg text-center transition duration-300 hover:shadow-xl">
+                    <p class="mb-4 text-gray-700">Doa restu dari Bapak/Ibu/Saudara/i merupakan karunia yang sangat berarti bagi kami. Namun, jika Anda ingin memberikan hadiah, silakan melalui transfer digital berikut:</p>
+
+                    <div class="bg-gray-100 p-4 rounded-lg mt-6">
+                        <p class="text-sm uppercase tracking-widest text-gray-500">Bank Transfer</p>
+                        <p class="text-2xl font-display font-bold text-gray-900 mt-1">BANK BNI</p>
+                        
+                        <div class="mt-4 border-t border-gray-300 pt-4">
+                            <p class="text-xs uppercase tracking-widest text-gray-500">Nomor Rekening</p>
+                            <p id="rekening-number" class="text-2xl font-body font-semibold text-gray-800 break-all">0397779480</p>
+                            <button onclick="copyToClipboard('rekening-number', this)" class="mt-3 inline-flex items-center px-4 py-2 bg-gray-900 text-white text-xs uppercase tracking-widest rounded-full hover:bg-gray-700 transition duration-300">
+                                <span data-lucide="copy" class="w-3 h-3 mr-2"></span>
+                                Salin Nomor Rekening
+                            </button>
+                            <!-- Message for copy action (needed for the JS function) -->
+                            <p id="copy-message" class="text-green-600 mt-2 text-sm opacity-0 transition duration-300">Berhasil disalin!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 8. Closing Statement -->
+        <section class="py-16 sm:py-24 bg-gray-900 text-white">
+            <div class="container mx-auto px-4 text-center scroll-reveal">
+                <p class="text-lg font-display italic mb-4">Wassalamualaikum Warahmatullahi Wabarakatuh</p>
+                <p class="text-sm uppercase tracking-widest text-gray-300">
+                    Kami yang berbahagia,
+                </p>
+                <h3 class="text-3xl sm:text-4xl font-display font-bold mt-2">
+                    Andi Arwan & Andi Surya Ningsi
+                </h3>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="py-4 bg-gray-800 text-center text-xs text-gray-400">
+            <p>&copy; 2025 Andi & Andi Wedding Invitation. Minimalist Elegance.</p>
+        </footer>
+
+    </div>
+    
+    <!-- Firebase Imports for RSVP Feature -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, signInAnonymously, signInWithCustomToken } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+        
+        // Ensure to use the global variables provided by the Canvas environment
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+        const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : null;
+        const initialAuthToken = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;
+
+        let db, auth;
+        let userId = null;
+        const rsvpAuthStatus = document.getElementById('rsvp-auth-status');
+        const rsvpSubmitBtn = document.getElementById('rsvp-submit-btn');
+
+        // Initialize Firebase and Authenticate
+        if (firebaseConfig) {
+            try {
+                const app = initializeApp(firebaseConfig);
+                db = getFirestore(app);
+                auth = getAuth(app);
+                
+                const signIn = async () => {
+                    try {
+                        if (initialAuthToken) {
+                            await signInWithCustomToken(auth, initialAuthToken);
+                            rsvpAuthStatus.textContent = 'Autentikasi berhasil. Siap mengirim RSVP.';
+                        } else {
+                            await signInAnonymously(auth);
+                            rsvpAuthStatus.textContent = 'Terautentikasi anonim. Siap mengirim RSVP.';
+                        }
+                        userId = auth.currentUser?.uid || crypto.randomUUID();
+                        rsvpSubmitBtn.disabled = false; // Enable button once authenticated
+                    } catch (error) {
+                        console.error("Firebase Auth Error:", error);
+                        rsvpAuthStatus.textContent = 'Gagal autentikasi. Fitur RSVP dinonaktifkan.';
+                        rsvpAuthStatus.classList.add('text-red-500');
+                    }
+                };
+                signIn();
+            } catch (error) {
+                console.error("Firebase Init Error:", error);
+                rsvpAuthStatus.textContent = 'Gagal memuat Firebase. Fitur RSVP dinonaktifkan.';
+                rsvpAuthStatus.classList.add('text-red-500');
+            }
+        } else {
+            console.warn("Firebase config not found. RSVP feature will be disabled.");
+            rsvpAuthStatus.textContent = 'Fitur RSVP dinonaktifkan (Config Firebase tidak ditemukan).';
+            rsvpAuthStatus.classList.add('text-red-500');
+        }
+
+
+        // --- RSVP Submission Logic ---
+        const rsvpForm = document.getElementById('rsvp-form');
+        const rsvpMessage = document.getElementById('rsvp-message');
+
+        if (rsvpForm) {
+            rsvpForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                
+                if (!db || !userId) {
+                    rsvpMessage.className = 'mt-4 text-center text-sm font-medium text-red-500';
+                    rsvpMessage.textContent = 'Error: Sistem belum siap. Coba lagi.';
+                    rsvpMessage.classList.remove('hidden');
+                    return;
+                }
+
+                rsvpSubmitBtn.disabled = true;
+                rsvpSubmitBtn.innerHTML = '<span data-lucide="loader" class="w-4 h-4 mr-2 animate-spin"></span> Mengirim...';
+                lucide.createIcons();
+
+                const guestName = document.getElementById('guest_name').value;
+                const attendance = document.querySelector('input[name="attendance"]:checked').value;
+                const attendeeCount = parseInt(document.getElementById('attendee_count').value);
+
+                const rsvpData = {
+                    guestName: guestName,
+                    attendance: attendance,
+                    attendeeCount: attendeeCount,
+                    timestamp: serverTimestamp(),
+                    submittedBy: userId,
+                    appId: appId
+                };
+
+                try {
+                    // Path for public data: /artifacts/{appId}/public/data/rsvps
+                    const collectionPath = `artifacts/${appId}/public/data/rsvps`;
+                    await addDoc(collection(db, collectionPath), rsvpData);
+
+                    rsvpMessage.className = 'mt-4 text-center text-sm font-medium text-green-600';
+                    rsvpMessage.textContent = 'Konfirmasi Anda berhasil dikirim! Terima kasih.';
+                    rsvpMessage.classList.remove('hidden');
+                    rsvpForm.reset();
+                    
+                    // Disable form fields after successful submission
+                    rsvpForm.querySelectorAll('input, select, button').forEach(el => el.disabled = true);
+
+                } catch (error) {
+                    console.error("Error submitting RSVP:", error);
+                    rsvpMessage.className = 'mt-4 text-center text-sm font-medium text-red-500';
+                    rsvpMessage.textContent = `Gagal mengirim konfirmasi: ${error.message}. Silakan coba lagi.`;
+                    rsvpSubmitBtn.disabled = false;
+                    rsvpSubmitBtn.innerHTML = 'Kirim Konfirmasi';
+                    lucide.createIcons();
+                }
+            });
+        }
+    </script>
+
+    <!-- JavaScript for Functionality and Animations -->
+    <script>
+        // Utility function to replace alert()
+        const alertBox = {
+            element: document.getElementById('custom-alert'),
+            message: document.getElementById('alert-message'),
+            show: function(msg) {
+                this.message.textContent = msg;
+                this.element.classList.remove('opacity-0', 'pointer-events-none');
+                this.element.classList.add('opacity-100');
+                // Auto hide after 5 seconds
+                setTimeout(() => {
+                    this.hide();
+                }, 5000);
+            },
+            hide: function() {
+                this.element.classList.remove('opacity-100');
+                this.element.classList.add('opacity-0', 'pointer-events-none');
+            }
+        };
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // Initialize Lucide Icons
+            lucide.createIcons();
+
+            const openBtn = document.getElementById('open-invitation-btn');
+            const overlay = document.getElementById('opener-overlay');
+            const mainContent = document.getElementById('main-content');
+            const musicToggle = document.getElementById('music-toggle');
+            const musicIcon = document.getElementById('music-icon');
+            const music = document.getElementById('wedding-music');
+            
+            let isMusicPlaying = false;
+            
+            // --- 1. Invitation Opening & Music Playback ---
+            openBtn.addEventListener('click', () => {
+                console.log("1. Open Invitation Clicked. Attempting to fade overlay.");
+                
+                // Fade out overlay and reveal main content
+                overlay.style.opacity = '0';
+                mainContent.style.opacity = '1';
+                musicToggle.classList.remove('hidden');
+                
+                setTimeout(() => {
+                    overlay.classList.add('hidden');
+                    document.body.classList.remove('no-scroll'); // Re-enable scrolling
+                    document.body.style.overflow = 'auto';
+
+                    // 1. Muat ulang (load) audio
+                    music.load();
+                    console.log("2. Audio element loaded. Source URL being tested: " + music.currentSrc);
+                    
+                    // ADDED: Error handler untuk masalah pemuatan file (sering terjadi karena izin/URL salah)
+                    music.onerror = function() {
+                        console.error("!!! FATAL AUDIO LOAD ERROR !!!");
+                        console.error("Gagal memuat file audio dari URL GitHub. Pastikan URL adalah 'Raw' link.");
+                        alertBox.show("Gagal memuat musik. Mohon cek URL audionya!");
+                        musicToggle.classList.add('bg-red-500'); // Highlight error state
+                        musicToggle.disabled = true;
+                    };
+
+
+                    // 2. Atur volume
+                    music.volume = 1.0; 
+                    
+                    // 3. Langsung asumsikan Autoplay GAGAL dan tunjukkan ikon MUTE
+                    isMusicPlaying = false;
+                    musicIcon.setAttribute('data-lucide', 'volume-x'); // Set icon ke Mute
+                    lucide.createIcons();
+                    
+                    // Coba memainkan musik sekali di belakang layar (jika browser mengizinkan)
+                    const playPromise = music.play();
+                    if (playPromise !== undefined) {
+                        playPromise.then(() => {
+                            // Autoplay berhasil (jarang terjadi)
+                            console.log("3. Autoplay succeeded!");
+                            isMusicPlaying = true;
+                            musicIcon.setAttribute('data-lucide', 'volume-2'); // Set icon ke Play
+                            lucide.createIcons();
+                        }).catch(error => {
+                            // Autoplay gagal (PALING UMUM), ikon Mute tetap ada, menunggu klik user
+                            console.log("3. Autoplay failed (Expected due to browser policy). Awaiting user click on toggle button.");
+                            console.error("Autoplay Error Details:", error.name);
+                        });
+                    }
+                    
+                    // Start Scroll Reveal after content is visible
+                    scrollElements.forEach(el => observer.observe(el));
+                    
+                }, 700); // Wait for fade-out transition
+            });
+
+            // --- 2. Music Toggle Handler (KLIK KEDUA WAJIB) ---
+            musicToggle.addEventListener('click', async () => {
+                console.log("4. Music Toggle button clicked. Current paused status:", music.paused);
+                
+                // Pastikan tombol tetap warna default (dark gray)
+                musicToggle.classList.remove('bg-red-500'); // Remove error highlight
+                musicToggle.classList.add('bg-gray-900');
+
+                if (music.paused) {
+                    try {
+                        // Mainkan secara manual
+                        await music.play();
+                        isMusicPlaying = true;
+                        musicIcon.setAttribute('data-lucide', 'volume-2');
+                        console.log("5. Music started successfully on manual click.");
+                        alertBox.show("Musik diputar.");
+                    } catch (error) {
+                        // Jika masih gagal di klik manual, kemungkinan besar masalah file/CORS
+                        if (error.name === "NotSupportedError" || error.name === "MediaError" || error.name === "NotAllowedError") {
+                            alertBox.show("Gagal memutar musik. Mungkin masalah izin atau format file.");
+                            musicToggle.classList.add('bg-red-500');
+                        }
+                        console.error("5. Error playing audio manually:", error);
+                        isMusicPlaying = false;
+                        musicIcon.setAttribute('data-lucide', 'volume-x');
+                        console.log("6. Music failed to play on manual click. Icon set to MUTE.");
+                    }
+                } else {
+                    music.pause();
+                    isMusicPlaying = false;
+                    musicIcon.setAttribute('data-lucide', 'volume-x');
+                    console.log("5. Music paused.");
+                    alertBox.show("Musik dijeda.");
+                }
+                lucide.createIcons();
+            });
+
+
+            // --- 3. Countdown Timer ---
+            const targetDate = new Date("October 19, 2025 09:00:00").getTime();
+            const countdownEl = document.getElementById('countdown');
+
+            function updateCountdown() {
+                const now = new Date().getTime();
+                const distance = targetDate - now;
+
+                // Time calculations
+                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                if (distance < 0) {
+                    clearInterval(countdownInterval);
+                    countdownEl.innerHTML = '<div class="col-span-4 text-2xl font-bold">ACARA SEDANG BERLANGSUNG!</div>';
+                    return;
+                }
+
+                const formatTimeBlock = (value, label) => `
+                    <div class="p-3 bg-gray-800 rounded-lg">
+                        <p class="text-3xl sm:text-4xl font-display font-bold">${value.toString().padStart(2, '0')}</p>
+                        <p class="text-xs uppercase tracking-widest mt-1">${label}</p>
+                    </div>
+                `;
+
+                countdownEl.innerHTML = 
+                    formatTimeBlock(days, 'Hari') +
+                    formatTimeBlock(hours, 'Jam') +
+                    formatTimeBlock(minutes, 'Menit') +
+                    formatTimeBlock(seconds, 'Detik');
+            }
+
+            const countdownInterval = setInterval(updateCountdown, 1000);
+            updateCountdown(); // Initial call to display immediately
+
+            // --- 4. Scroll Reveal Animation (Intersection Observer) ---
+            const scrollElements = document.querySelectorAll(".scroll-reveal");
+
+            const observerOptions = {
+                root: null,
+                rootMargin: "0px",
+                threshold: 0.1 // Trigger when 10% of element is visible
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add("visible");
+                        // observer.unobserve(entry.target); // Stop observing once visible
+                    }
+                });
+            }, observerOptions);
+
+            // --- 5. Copy to Clipboard Function ---
+            function copyToClipboard(elementId, button) {
+                const element = document.getElementById(elementId);
+                const textToCopy = element.textContent || element.innerText;
+                
+                // Use execCommand for broader compatibility in iframe environments
+                const tempInput = document.createElement('textarea');
+                tempInput.value = textToCopy;
+                document.body.appendChild(tempInput);
+                tempInput.select();
+                try {
+                    document.execCommand('copy');
+                    
+                    const message = document.getElementById('copy-message');
+                    message.classList.add('opacity-100');
+                    button.innerHTML = '<span data-lucide="check" class="w-3 h-3 mr-2"></span> Berhasil Disalin';
+                    lucide.createIcons();
+
+                    setTimeout(() => {
+                        message.classList.remove('opacity-100');
+                        button.innerHTML = '<span data-lucide="copy" class="w-3 h-3 mr-2"></span> Salin Nomor Rekening';
+                        lucide.createIcons();
+                    }, 2000);
+                } catch (err) {
+                    console.error('Failed to copy text: ', err);
+                } finally {
+                    document.body.removeChild(tempInput);
+                }
+            }
+
+            // Make copyToClipboard function globally accessible
+            window.copyToClipboard = copyToClipboard;
+        });
+    </script>
+</body>
+</html>
